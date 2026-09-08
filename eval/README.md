@@ -55,3 +55,23 @@ band and `human_verdict` agree. Track, at minimum:
 
 Once there are enough examples to make percentages meaningful, a small script to tabulate these can live here —
 don't build it prematurely on top of 10 examples.
+
+## Third-party datasets considered and declined (2026-09)
+
+Two datasets were suggested as possible sources. Neither is used. Recorded here so the reasoning isn't lost:
+
+- **`MentionBroker/reddit-comment-generation-v1`** (Hugging Face). Verified to exist. Its own description says it's
+  built by MentionBroker — a commercial "Reddit brand visibility / Reddit mentions" service — as SFT training data
+  for an LLM to generate "high-authority, authentic community responses," i.e. it's a corpus of comments purpose-built
+  to insert brand mentions while reading as genuine. That's the input side of astroturfing, not the detection side.
+  Training or evaluating on it teaches a model that specific vendor's synthetic style, not real-world promotional
+  language, and studying/redistributing a commercial astroturfing vendor's generation corpus is not something this
+  project should do even framed as "detector training data." **Declined — do not use.**
+- **`SocialGrep/the-reddit-dataset-dataset`** (Hugging Face). Verified to exist, labeled CC-BY-4.0 by the publisher.
+  More legitimate on its face than the above, but the CC-BY-4.0 label is SocialGrep's own relicensing claim over
+  content whose underlying copyright sits with individual redditors — it doesn't resolve the same restriction this
+  project is already built around (Reddit's Data API Terms bar using Reddit-sourced content to train ML/AI models
+  without Reddit's own license, regardless of the path the data took to reach you). Using it for training would need
+  a legal review of that gap first, and per the project's own ground rules above, wouldn't replace hand-reviewed
+  evaluation examples anyway (bulk import contradicts the "one human reviewer, one read" rule). **Not used for v1;
+  revisit only alongside a legal review if/when training is ever actually pursued.**
