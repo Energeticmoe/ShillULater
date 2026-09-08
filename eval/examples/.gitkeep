@@ -1,0 +1,3 @@
+Add one JSON file per hand-reviewed example here, named yyyy-mm-dd-shortslug.json,
+matching eval/template.json. See eval/README.md for the ground rules before adding
+anything — no bulk import, one human reviewer per example, evaluation only.

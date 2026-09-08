@@ -1,0 +1,12 @@
+{
+  "name": "shill-ulate",
+  "private": true,
+  "type": "module",
+  "description": "Promotional-tone risk checker for Reddit comment drafts (Maven internal tool).",
+  "scripts": {
+    "dev": "wrangler pages dev public --compatibility-date=2026-01-01"
+  },
+  "devDependencies": {
+    "wrangler": "^3"
+  }
+}

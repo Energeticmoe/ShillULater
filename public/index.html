@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shill-ulate</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="page-header">
+    <h1>Shill-ulate</h1>
+    <p class="subtitle">Promotional-tone risk check for Reddit comment drafts — Maven internal tool</p>
+  </header>
+
+  <div class="disclaimer-banner">
+    <strong>Read before you rely on this:</strong> The score below is a rubric-based assessment, not a calibrated
+    probability that anyone is a "shill," and not a verified-authenticity percentage. A score of 0 does not guarantee
+    the author is genuine or that a post will be accepted. Text alone cannot prove or disprove coordinated
+    astroturfing.
+  </div>
+
+  <main>
+    <section class="score-panel" aria-live="polite">
+      <div class="score-label">Promotional-tone risk</div>
+      <div class="score-value" id="scoreValue">—</div>
+      <div class="score-sub">0 = low rubric risk · 100 = high rubric risk</div>
+    </section>
+
+    <form id="shillForm">
+      <label for="username">Reddit username</label>
+      <input type="text" id="username" name="username" placeholder="e.g. u/example" autocomplete="off" />
+
+      <label for="draft">Draft comment</label>
+      <textarea id="draft" name="draft" rows="8" required placeholder="Paste the comment you're about to post…"></textarea>
+
+      <label for="threadUrl">Thread URL (for conversation context)</label>
+      <input type="url" id="threadUrl" name="threadUrl" placeholder="https://www.reddit.com/r/.../comments/..." />
+
+      <label for="affiliation">Declared affiliation</label>
+      <select id="affiliation" name="affiliation">
+        <option value="employee_founder">Employee or founder of the company being discussed</option>
+        <option value="agency_contractor">Agency or contractor working on behalf of the company</option>
+        <option value="paid_partner">Paid partner / sponsored</option>
+        <option value="customer_no_relationship">Customer, no business relationship</option>
+        <option value="no_relationship">No relationship to the company</option>
+        <option value="other">Other</option>
+      </select>
+      <p class="field-note">Self-reported — not independently verified.</p>
+
+      <div class="fallback-toggle-row">
+        <button type="button" id="toggleProfilePaste" class="link-button">+ Add pasted Reddit history</button>
+        <button type="button" id="toggleThreadPaste" class="link-button">+ Add pasted thread text</button>
+      </div>
+
+      <section id="profilePasteSection" class="paste-section" hidden>
+        <h3>Paste your Reddit history</h3>
+        <p id="profileAccessStatus" class="access-status"></p>
+        <p class="instructions">
+          Open your Reddit profile's Posts or Comments tab, load the entries you want reviewed, then press
+          Ctrl+A and Ctrl+C (Cmd+A and Cmd+C on Mac). Paste the copied text here. You can paste posts and comments
+          separately.
+        </p>
+        <p class="caveat">
+          Copying a page captures only the content currently loaded and may include navigation text. It does not
+          necessarily include the account's full history. Please review the pasted content and remove anything you
+          do not want analyzed before submitting.
+        </p>
+        <label for="pastedPosts">Pasted posts (optional)</label>
+        <textarea id="pastedPosts" rows="6" placeholder="Paste content from your Posts tab…"></textarea>
+        <label for="pastedComments">Pasted comments (optional)</label>
+        <textarea id="pastedComments" rows="6" placeholder="Paste content from your Comments tab…"></textarea>
+      </section>
+
+      <section id="threadPasteSection" class="paste-section" hidden>
+        <h3>Paste the original post &amp; relevant replies</h3>
+        <p id="threadAccessStatus" class="access-status"></p>
+        <p class="caveat">
+          Use this if the thread URL can't be fetched automatically. Paste the original post and any replies that
+          give context for your draft.
+        </p>
+        <label for="pastedThread">Original post &amp; relevant replies (optional)</label>
+        <textarea id="pastedThread" rows="6" placeholder="Paste the thread content…"></textarea>
+      </section>
+
+      <button type="submit" id="submitBtn">Shill-ulate</button>
+    </form>
+
+    <section id="results" hidden>
+      <h2>Results</h2>
+
+      <div class="result-block">
+        <h3>Reasons</h3>
+        <ul id="reasonsList"></ul>
+      </div>
+
+      <div class="result-block">
+        <h3>Account-context findings</h3>
+        <p class="sub-heading">Observations</p>
+        <ul id="observationsList"></ul>
+        <p class="sub-heading">Inferences</p>
+        <ul id="inferencesList"></ul>
+        <p class="coverage-note" id="coverageNote"></p>
+      </div>
+
+      <div class="result-block">
+        <h3>Disclosure check</h3>
+        <p id="disclosureMatch"></p>
+      </div>
+
+      <div class="result-block">
+        <h3>Missing information &amp; confidence</h3>
+        <ul id="missingInfoList"></ul>
+        <p id="confidenceNote"></p>
+      </div>
+
+      <div class="result-block">
+        <h3>Suggested rewrite</h3>
+        <p id="rewriteText" class="rewrite-box"></p>
+      </div>
+
+      <div class="result-block">
+        <h3>Writing tip</h3>
+        <p id="tipText"></p>
+      </div>
+
+      <div class="result-block disclaimer-footer">
+        <ul id="disclaimersList"></ul>
+      </div>
+    </section>
+
+    <p id="errorMessage" class="error-message" hidden></p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

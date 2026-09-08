@@ -1,0 +1,15 @@
+{
+  "id": "yyyy-mm-dd-shortslug",
+  "category": "genuine_recommendation",
+  "comment_text": "",
+  "thread_context_summary": "",
+  "declared_or_apparent_affiliation": "none stated",
+  "accusation_present": false,
+  "accusation_text": null,
+  "human_verdict": "low_risk",
+  "human_verdict_rationale": "",
+  "date_reviewed": "yyyy-mm-dd",
+  "reviewer": "",
+  "notes": "",
+  "retention_note": "Public comment text only; no additional profile data collected; retained for evaluation use only per Reddit Data API Terms."
+}
