@@ -1,9 +1,11 @@
 // Thin client for the Gemini API. Keeps the API key server-side only.
 
-const DEFAULT_MODEL = 'gemini-2.5-flash';
-// NOTE: verify this is still a current model name in Google AI Studio when you
-// set up GEMINI_API_KEY — Google renames/retires models periodically. Override
-// with the GEMINI_MODEL environment variable without touching code.
+const DEFAULT_MODEL = 'gemini-3.6-flash';
+// Verified live against the Gemini API on 2026-09-08: gemini-2.5-flash was
+// rejected with a 404 telling new callers to use gemini-3.6-flash. Google
+// renames/retires models periodically — if this starts 404ing again, check
+// the error body (it names the current model) or aistudio.google.com, and
+// override via the GEMINI_MODEL environment variable without touching code.
 
 export async function callGemini(env, systemPrompt, userContent, schema) {
   const apiKey = env.GEMINI_API_KEY;
